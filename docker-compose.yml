@@ -2,16 +2,13 @@ version: "3"
 
 services:
   app:
-    working_dir: /app
     container_name: node-template
     build: .
-    command: ["./wait-for-it.sh", "--timeout=0", "mysql:3306", "--", "npm", "run", "prod"]
+    command: /bin/bash wait-for-it.sh --timeout=0 mysql:3306 -- npm run prod
     ports:
       - 3000:3000
     links:
       - mysql
-    volumes:
-      - ./:/app
     depends_on:
       - mysql
   mysql:

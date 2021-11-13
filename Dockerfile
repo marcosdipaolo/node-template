@@ -1,9 +1,16 @@
-FROM node:14.17 AS builder
+FROM node:alpine AS builder
 WORKDIR /app
-COPY . .
-RUN ls -l
-RUN npm install && \
-    npm install -g retire && \
-    retire
-RUN ["chmod", "+x", "wait-for-it.sh"]
+COPY package.json tsconfig.json ./
+COPY src src/
+RUN npm install
+RUN npx tsc
+
+FROM node:alpine
+WORKDIR /app
+RUN apk update && apk add bash
+COPY wait-for-it.sh ./
+COPY package.json .
+RUN chmod +x wait-for-it.sh
+RUN npm i --production
+COPY --from=builder /app/dist dist
 EXPOSE 3000
