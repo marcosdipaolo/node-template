@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.container = void 0;
+var inversify_1 = require("inversify");
+var Application_1 = require("../Application");
+var Environment_1 = require("../Environment");
+var DB_1 = require("../database/DB");
+var UserRepository_1 = require("../repositories/UserRepository");
+var UserService_1 = require("../services/UserService");
+var types_1 = require("./types");
+var container = new inversify_1.Container();
+exports.container = container;
+container.bind(Application_1.Application).toSelf();
+container.bind(DB_1.DB).toSelf();
+container.bind(Environment_1.Environment).toConstantValue(Environment_1.Environment.getInstance());
+container.bind(types_1.TYPES.userService).to(UserService_1.UserService);
+container.bind(types_1.TYPES.userRepository).to(UserRepository_1.UserRepository);

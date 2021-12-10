@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package.json tsconfig.json ./
 COPY src src/
 RUN npm install
-RUN npx tsc
+RUN npm run build
 
 FROM node:alpine
 WORKDIR /app

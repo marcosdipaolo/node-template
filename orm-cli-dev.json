@@ -1,0 +1,12 @@
+{
+  "type": "mysql",
+  "username": "root",
+  "password": "root",
+  "database": "aaa_typeorm",
+  "migrations": ["dist/database/migrations/*.js"],
+  "entities": ["dist/entities/*.js"],
+  "cli": {
+    "migrationsDir": "src/database/migrations",
+    "entitiesDir": "src/entities"
+  }
+}

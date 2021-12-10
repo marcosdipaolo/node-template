@@ -1,0 +1,5 @@
+{
+  "type": "sqlite",
+  "database": "./test/db.sqlite",
+  "entities": ["dist/entities/*.js"]
+}

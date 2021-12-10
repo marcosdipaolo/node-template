@@ -4,20 +4,37 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx ts-node-dev src/index.ts",
-    "prod": "cd /app && ls -l && node dist/index.js"
+    "dev": "NODE_ENV=development npx ts-node-dev src/index.ts",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "prod": "NODE_ENV=production node dist/index.js",
+    "migrate:dev": "typeorm migration:run -f orm-cli-dev",
+    "migrate:test": "typeorm migration:run -f orm-cli-dev"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.13.0",
+    "inversify": "^6.0.1",
+    "inversify-express-utils": "^6.4.3",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^5.0.2",
+    "typeorm": "^0.2.40"
   },
   "devDependencies": {
-    "typescript": "^4.4.4",
     "@types/express": "^4.17.13",
+    "@types/express-validator": "^3.0.0",
+    "@types/inversify": "^2.0.33",
+    "@types/inversify-express-utils": "^2.0.0",
+    "@types/morgan": "^1.9.3",
     "@types/node": "^16.11.4",
     "ts-node": "^10.4.0",
-    "ts-node-dev": "^1.1.8"
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.4"
   }
 }
