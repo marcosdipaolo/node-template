@@ -1,19 +1,18 @@
 import fs from 'fs';
-import { toPascalCase, getFilePath, validateInput } from "./helpers";
+import { getFilePath, validateInput } from "./helpers";
 import { Objects } from './Objects';
 import { Commands } from './Commands';
-import code from "./code";
+import code, { Code } from "./code";
+import inputProcessor from './inputProcessor';
 
 try {
   const args = process.argv.slice(2);
-  const task = args[0];
-  const description = toPascalCase(args[1]);
-  const [command, object] = task.split(":");
+  const { description, command, object } = inputProcessor(args);
   
   validateInput(command as Commands, object as Objects, description, args);
-  
-  fs.writeFileSync(getFilePath(object, description), code[object](description), { encoding: 'utf8' });
-} catch(err) {
+
+  fs.writeFileSync(getFilePath(object, description), code[object as keyof Code](description), { encoding: 'utf8' });
+} catch (err) {
   console.log("There has been an error: ", err.message)
   process.exit();
 }

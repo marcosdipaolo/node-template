@@ -12,6 +12,7 @@ export class UserController extends BaseHttpController implements interfaces.Con
   ) {
     super();
   }
+  
   @httpPost("/", ...userValidator.create(), userValidator.errorHandler())
   createUser(@request() req: Request) {
     return this.userService.createUser(req);

@@ -1,3 +1,11 @@
+export type Code = {
+  migration: (description: string) => string,
+  entity: (description: string) => string,
+  service: () => string,
+  repository: () => string,
+  validator: (description: string) => string,
+}
+
 export default {
   migration: description => `
 import { MigrationInterface, QueryRunner } from "typeorm";
@@ -20,5 +28,17 @@ export class ${description} {
 }
   `,
   service: () => ``,
-  repository: () => ``
-}
+  repository: () => ``,
+  validator: (description: string) => `
+import { ValidationChain } from "express-validator";
+import { errorHandler } from "./errorHandler";
+
+export const ${description} = {
+  create(): ValidationChain[] {
+    return [];
+  },
+
+  errorHandler
+}  
+  `,
+} as Code
