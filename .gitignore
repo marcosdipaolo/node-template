@@ -2,3 +2,4 @@ node_modules/
 test/db.sqlite
 package-lock.json
 dist/
+sql/
