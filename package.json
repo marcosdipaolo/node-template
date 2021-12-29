@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development npx ts-node-dev src/index.ts",
+    "local:dev": "NODE_ENV=development npx ts-node-dev src/index.ts",
+    "local:test": "NODE_ENV=test npx ts-node-dev src/index.ts",
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc",
     "prod": "NODE_ENV=production node dist/index.js",
     "migrate:dev": "typeorm migration:run -f orm-cli-dev",
-    "migrate:test": "typeorm migration:run -f orm-cli-dev"
+    "migrate:test": "typeorm migration:run -f orm-cli-test"
   },
   "keywords": [],
   "author": "",

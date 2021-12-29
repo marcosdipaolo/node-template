@@ -17,7 +17,7 @@ export default [
     "name": "test",
     "type": process.env.DB_DIALECT,
     "database": process.env.DB_FILE,
-    "entities": ["dist/entities/*.js"],
+    "entities": [path.join(__dirname, "/entities/**/*.{js,ts}")],
   },
   {
     // MOCKED PROD DATA, REPLACE WITH ACTUAL PRODUCTION ENV VALUES
