@@ -1,9 +1,9 @@
 export enum Objects {
-  MIGRATION = 'migration',
-  ENTITY = 'entity',
-  SERVICE = 'service',
-  REPOSITORY = 'repository',
-  VALIDATOR = 'validator',
+  MIGRATION = 'Migration',
+  ENTITY = 'Entity',
+  SERVICE = 'Service',
+  REPOSITORY = 'Repository',
+  VALIDATOR = 'Validator',
 }
 
 const objects: Objects[] = [];

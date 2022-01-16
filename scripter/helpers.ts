@@ -42,8 +42,7 @@ export const toPascalCase = (string: string = "") => {
     .replace(new RegExp(/\w/), s => s.toUpperCase());
 }
 
-export const validateInput = (command: Commands, object: Objects, description: string, args: string[]) => {
-  if (!args.length) { console.log("Not enough arguments"); process.exit(); }
+export const validateInput = (command: Commands, object: Objects, description: string) => {
   if (!commandExist(command as Commands)) {
     console.log(`Command "${command}" does not exist.`);
     process.exit();

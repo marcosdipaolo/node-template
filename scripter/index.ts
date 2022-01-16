@@ -1,20 +1,27 @@
 import fs from 'fs';
-import { getFilePath, validateInput } from "./helpers";
-import { Objects } from './Objects';
-import { Commands } from './Commands';
-import code, { Code } from "./code";
-import inputProcessor from './inputProcessor';
+import { getFilePath, toPascalCase, validateInput } from "./helpers";
+import code, { CodeSnippets } from "./code";
+import { Commands } from "./Commands";
+import { Objects } from "./Objects";
+import { actionPrompt, objectNamePrompt, objectPrompt } from "./prompts"
 
-try {
-  const args = process.argv.slice(2);
-  const { description, command, object } = inputProcessor(args);
-  
-  validateInput(command as Commands, object as Objects, description, args);
-
-  fs.writeFileSync(getFilePath(object, description), code[object as keyof Code](description), { encoding: 'utf8' });
-} catch (err) {
-  console.log("There has been an error: ", err.message)
-  process.exit();
-}
+(async () => {
+  try {
+    const action = await actionPrompt.run();
+    switch (action) {
+      case Commands.MAKE:
+        const objectToBeMade: Objects = await objectPrompt.run();
+        const objName = toPascalCase((await objectNamePrompt(objectToBeMade)).objectName);
+        validateInput(action as Commands, objectToBeMade as Objects, objName);
+        fs.writeFileSync(
+          getFilePath(objectToBeMade, objName), 
+          code[objectToBeMade as keyof CodeSnippets](objName), 
+          { encoding: 'utf8' }
+        );
+        break;
+    }
+  } catch (err) {
+  }
+})();
 
 

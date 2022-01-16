@@ -1,13 +1,13 @@
-export type Code = {
-  migration: (description: string) => string,
-  entity: (description: string) => string,
-  service: () => string,
-  repository: () => string,
-  validator: (description: string) => string,
+export type CodeSnippets = {
+  Migration: (description: string) => string,
+  Entity: (description: string) => string,
+  Service: () => string,
+  Repository: () => string,
+  Validator: (description: string) => string,
 }
 
 export default {
-  migration: description => `
+  Migration: description => `
 import { MigrationInterface, QueryRunner } from "typeorm";
 
 export default class ${description}${Date.now()} implements MigrationInterface {
@@ -18,7 +18,7 @@ export default class ${description}${Date.now()} implements MigrationInterface {
   
 }
   `,
-  entity: description => `
+  Entity: description => `
 import { Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -27,9 +27,9 @@ export class ${description} {
   id!: number
 }
   `,
-  service: () => ``,
-  repository: () => ``,
-  validator: (description: string) => `
+  Service: () => ``,
+  Repository: () => ``,
+  Validator: (description: string) => `
 import { ValidationChain } from "express-validator";
 import { errorHandler } from "./errorHandler";
 
@@ -41,4 +41,4 @@ export const ${description} = {
   errorHandler
 }  
   `,
-} as Code
+} as CodeSnippets

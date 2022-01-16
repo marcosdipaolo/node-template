@@ -1,3 +1,3 @@
 export enum Commands {
-  MAKE = 'make'
+  MAKE = 'Make something'
 }
